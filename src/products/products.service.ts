@@ -29,7 +29,8 @@ export class ProductsService {
   ];
 
   create(product: CreateProductDto) {
-    this.products.push(product);
+    const id = this.products.length + 1;
+    this.products.push({ id: id, ...product });
     return this.products;
   }
 
