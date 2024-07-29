@@ -22,8 +22,16 @@ export class ProductsController {
   }
 
   @Get()
-  findAll(): ProductDto[] {
-    return this.productsService.findAll();
+  async findAll(): Promise<ProductDto[]> {
+    const result = await new Promise<ProductDto[]>((resolve) => {
+      setTimeout(() => {
+        console.log(
+          'PRODUCTS: Testing behavior of React Query with a delay of 3 seconds.',
+        );
+        resolve(this.productsService.findAll());
+      }, 3000);
+    });
+    return result;
   }
 
   @Get(':id')
